@@ -1,0 +1,18 @@
+# Caddy
+caddy.exe
+
+# Archivos comprimidos
+*.zip
+*.tar.gz
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+
+# Temp
+temp/
+tmp/

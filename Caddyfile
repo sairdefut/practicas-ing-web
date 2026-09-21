@@ -1,0 +1,23 @@
+# Caddyfile para Brillo Estelar API Gateway
+
+:8080 {
+    # Redirigir tráfico de Auth al microservicio de Autenticación (Puerto 8083)
+    handle_path /api/auth* {
+        reverse_proxy localhost:8083
+    }
+
+    # Redirigir tráfico de clientes al microservicio de Clientes (Puerto 8081)
+    handle_path /api/clientes* {
+        reverse_proxy localhost:8081
+    }
+
+    # Redirigir tráfico de servicios al microservicio de Servicios (Puerto 8082)
+    handle_path /api/servicios* {
+        reverse_proxy localhost:8082
+    }
+
+    # Opcional: Respuestas predeterminadas para rutas no encontradas
+    handle {
+        respond "API Gateway de Brillo Estelar. Rutas disponibles: /api/clientes, /api/servicios" 404
+    }
+}

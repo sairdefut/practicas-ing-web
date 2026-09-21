@@ -1,0 +1,134 @@
+{
+  "info": {
+    "name": "Brillo Estelar API Gateway (Caddy) + Auth + Citas por Fecha",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Registrar Usuario",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/auth/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "auth", "register"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"secreta123\"\n}"
+        }
+      }
+    },
+    {
+      "name": "2. Iniciar Sesión (Login)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "auth", "login"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"secreta123\"\n}"
+        }
+      }
+    },
+    {
+      "name": "3. Registrar un nuevo Cliente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer <AQUÍ_PEGA_EL_TOKEN_OBTENIDO_EN_EL_LOGIN>"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/clientes",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "clientes"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Juan Pérez\",\n  \"telefono\": \"0991234567\",\n  \"vehiculo\": \"Toyota Corolla\",\n  \"placa\": \"ABC-1234\"\n}"
+        }
+      }
+    },
+    {
+      "name": "4. Registrar el trabajo de pulido (Cita)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer <AQUÍ_PEGA_EL_TOKEN_OBTENIDO_EN_EL_LOGIN>"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/servicios",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "servicios"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"clienteId\": 1,\n  \"tipoTratamiento\": \"Pulido y restauración de faros\",\n  \"precio\": 45.00\n}"
+        }
+      }
+    },
+    {
+      "name": "5. Listar Citas por Día (Fecha)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <AQUÍ_PEGA_EL_TOKEN_OBTENIDO_EN_EL_LOGIN>"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/servicios?fecha=2026-10-25",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "servicios"],
+          "query": [
+            {
+              "key": "fecha",
+              "value": "2026-10-25",
+              "description": "Formato YYYY-MM-DD"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
